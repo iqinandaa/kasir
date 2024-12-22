@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Order Status</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Order Status</h1>
+            <a href="/logout" class="logout-btn">Logout</a>
+            <a href="/menu" class="btn">Back to Menu</a>
+        </header>
+        <h2>Your Orders</h2>
+        <table class="order-table">
+            <tr>
+                <th>Order ID</th>
+                <th>Food Name</th>
+                <th>Status</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>{{ order[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

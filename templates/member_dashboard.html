@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Member Dashboard</title>
+    <style>
+        /* Reset dan gaya umum */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffcc80, #ffa726);
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background: #ffa726;
+            padding: 10px 0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: #ff9800;
+        }
+
+        .logout-btn {
+            background: #e53935;
+            color: #fff;
+        }
+
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+
+        .food-image {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .menu-item h4 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #ff5722;
+        }
+
+        .menu-item p {
+            font-size: 16px;
+            color: #757575;
+        }
+
+        .btn {
+            background: #4caf50;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #388e3c;
+        }
+
+        /* Tabel Status */
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .order-table th, .order-table td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background: #ffa726;
+            color: #fff;
+        }
+
+        .order-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .order-table tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        .order-table tr:hover {
+            background: #ffe0b2;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <a href="/member" class="nav-item">Menu Makanan</a>
+            <a href="/status" class="nav-item">Status Pesanan</a>
+            <a href="/payment" class="nav-item">Pembayaran</a>
+            <a href="/logout" class="nav-item logout-btn">Logout</a>
+        </nav>
+
+        <!-- Content Section -->
+        <div class="content">
+            {% if section == 'menu' %}
+            <!-- Menu Makanan Section -->
+            <h3>Menu Makanan</h3>
+            <div class="menu-grid">
+                {% for food in menu_items %}
+                <div class="menu-item">
+                    <img src="{{ food.image }}" alt="{{ food.name }}" class="food-image">
+                    <h4>{{ food.name }}</h4>
+                    <p>${{ food.price }}</p>
+                    <form action="/member" method="post">
+                        <input type="hidden" name="food_name" value="{{ food.name }}">
+                        <label for="quantity">Jumlah:</label>
+                        <input type="number" name="quantity" min="1" max="10" required>
+                        <button type="submit" class="btn">Pesan</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if section == 'status' %}
+            <!-- Status Pesanan Section -->
+            <h3>Status Pesanan Anda</h3>
+            <table class="order-table">
+                <tr>
+                    <th>ID Pesanan</th>
+                    <th>Nama Makanan</th>
+                    <th>Jumlah</th>
+                    <th>Status</th>
+                </tr>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order[0] }}</td>
+                    <td>{{ order[1] }}</td>
+                    <td>{{ order[2] }}</td>
+                    <td>{{ order[3] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

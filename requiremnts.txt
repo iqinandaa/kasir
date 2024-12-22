@@ -1,0 +1,7 @@
+admin login
+username: admin
+password: 46
+
+member login
+username: iptek2022
+password: 55

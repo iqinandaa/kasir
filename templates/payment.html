@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffcc80, #ffa726);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        header a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn {
+            background: #e53935;
+        }
+
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+
+        .btn {
+            background: #4CAF50;
+        }
+
+        .btn:hover {
+            background: #388e3c;
+        }
+
+        h3 {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .order-table th, .order-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background: #ffa726;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .order-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .order-table tr:hover {
+            background: #ffe0b2;
+        }
+
+        .total-section {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .payment-method {
+            margin-top: 30px;
+        }
+
+        .bank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .bank-item {
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Menyesuaikan dengan container */
+            max-width: 900px; /* Maksimal lebar box */
+            margin: 0 auto; /* Tengah secara horizontal */
+            transition: background 0.3s ease;
+        }
+
+        .bank-item:hover {
+            background: #ffe0b2;
+        }
+
+        .bank-logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        .bank-details {
+            flex-grow: 1;
+            font-size: 14px;
+        }
+
+        .bank-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .account-number {
+            color: #757575;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pembayaran</h1>
+            <div>
+                <a href="/logout" class="logout-btn">Logout</a>
+                <a href="/member" class="btn">Kembali ke Menu</a>
+            </div>
+        </header>
+
+        <h3>Rincian Pembayaran</h3>
+        <table class="order-table">
+            <tr>
+                <th>Nama Makanan</th>
+                <th>Jumlah</th>
+                <th>Harga Satuan</th>
+                <th>Total</th>
+            </tr>
+            {% for payment in payments %}
+            <tr>
+                <td>{{ payment.food_name }}</td>
+                <td>{{ payment.quantity }}</td>
+                <td>${{ payment.price }}</td>
+                <td>${{ payment.total }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="total-section">
+            Total Keseluruhan: ${{ total_amount }}
+        </div>
+
+        <h3 class="payment-method">Metode Pembayaran</h3>
+        <div class="bank-list">
+            {% for bank in bank_accounts %}
+            <div class="bank-item">
+                <img src="{{ bank.logo }}" alt="{{ bank.bank }}" class="bank-logo">
+                <div class="bank-details">
+                    <div class="bank-name">{{ bank.bank }}</div>
+                    <div class="account-number">Nomor Rekening: {{ bank.account_number }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

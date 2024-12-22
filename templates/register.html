@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Food Paradise</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #fbc02d, #ff8f00);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            padding: 2rem 3rem;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-title {
+            color: #ff8f00;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            width: 100%;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fbc02d;
+        }
+
+        .form-control {
+            width: 100%;
+            padding-left: 40px;
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            border-color: #ff8f00;
+            box-shadow: 0 0 8px rgba(255, 143, 0, 0.3);
+        }
+
+        .form-select {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            padding: 0 10px;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            font-weight: bold;
+            background: linear-gradient(to right, #ff8f00, #f57c00);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #f57c00, #ef6c00);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: #f57c00;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .text-primary:hover {
+            text-decoration: underline;
+        }
+
+        .form-footer {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Register Food Paradise</h2>
+                <form action="/register" method="POST">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-user-tag"></i>
+                        <select name="role" class="form-select" required>
+                            <option value="" disabled selected>Pilih Role</option>
+                            <option value="member">Member</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Daftar Sekarang</button>
+                </form>
+                <div class="form-footer text-center mt-3">
+                    <p>Sudah punya akun? <a href="/login" class="text-primary">Login di sini</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link Font Awesome untuk ikon -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
